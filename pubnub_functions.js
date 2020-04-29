@@ -1,19 +1,43 @@
+var direction = "North";
+
+
+// Creates a pubnub object and save it in variable pubnubDemo.
 var pubnubDemo = new PubNub({
     publishKey: 'pub-c-864af332-3663-4763-8bc0-78442d476f04',
     subscribeKey: 'sub-c-78a1f70e-8a0a-11ea-927a-2efbc014b69f'
 });
 
-pubnubDemo.publish({ message: { "color" : "blue" }, channel: 'demo_tutorial' });
-
 pubnubDemo.addListener({
-    message: function(message){
-        console.log(message)
+    message: function (event) {
+        displayMessage(event.message.msg);
     }
 })
 
 pubnubDemo.subscribe({
-    channels:['demo_tutorial']
+    channels: ['North', 'West', 'South', 'East'],
+    withPresence: true
 });
+
+
+function sendMessage() {
+    var msg = document.getElementById("message").value;
+    pubnubDemo.publish({
+        message: {'msg': msg},
+        channel: direction
+        },
+        function(status, response) {
+            if (status.error) {
+                console.log(status)
+            }
+        });
+}
+
+function displayMessage(Message) {
+    let pmessage = document.createElement('p');
+    pmessage.appendChild(document.createTextNode(Message));
+    document.getElementById("chat_window_body").appendChild(pmessage);
+}
+
 
 function givePermission() {
     // feature detect
@@ -42,7 +66,6 @@ function handleOrientation(event)
 
     document.getElementById("heading").innerHTML = heading.toFixed([0]);
 
-    var direction = "North";
     if (heading >= 45 && heading < 135) {
         direction = "North";
     } else if (heading >= 135 && heading < 225) {
@@ -52,7 +75,6 @@ function handleOrientation(event)
     } else {
         direction = "East";
     }
-
     document.getElementById("direction").innerHTML = direction;
 
 }

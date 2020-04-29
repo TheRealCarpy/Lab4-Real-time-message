@@ -34,3 +34,7 @@ body{
     border: 1px solid #ccc;
     margin-bottom: 5px;
 }
+
+#chat_window_body{
+    margin: 10px;
+}
