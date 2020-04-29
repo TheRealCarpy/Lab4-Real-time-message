@@ -15,30 +15,6 @@ pubnubDemo.subscribe({
     channels:['demo_tutorial']
 });
 
-function givePermission() {
-    //feature detect
-    if (typeof DeviceOrientationEvent.requestPermission === 'function') {
-        DeviceOrientationEvent.requestPermission()
-            .then(permissionState => {
-                if (permissionState === 'granted') {
-                    window.addEventListener('deviceorientation', handleOrientation, true);
-                }
-            })
-            .catch(console.error);
-    } else {
-        //just serve up the EventListener w/o permissions here
-        window.addEventListener('deviceorientation', handleOrientation, true);
-    }
-}
 
-function handleOrientation(event)
-{
-    var heading = event.alpha;
 
-    // Some browsers don't understand alpha
-    if (typeof event.webkitCompassHeading !== "undefined") {
-        heading = event.webkitCompassHeading;
-    }
 
-    document.getElementById("Heading").innerHTML = heading.toFixed([0]);
-}
