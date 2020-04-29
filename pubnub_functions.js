@@ -1,5 +1,5 @@
 var direction = "North";
-
+var content = "chat_n";
 
 // Creates a pubnub object and save it in variable pubnubDemo.
 var pubnubDemo = new PubNub({
@@ -35,7 +35,7 @@ function sendMessage() {
 function displayMessage(Message) {
     let pmessage = document.createElement('p');
     pmessage.appendChild(document.createTextNode(Message));
-    document.getElementById("chat_window_body").appendChild(pmessage);
+    document.getElementById(content).appendChild(pmessage);
 }
 
 
@@ -70,12 +70,32 @@ function handleOrientation(event)
 
     if (heading >= 45 && heading < 135) {
         direction = "North";
+        document.getElementById("chat_n").style.display = 'block';
+        document.getElementById("chat_w").style.display = 'none';
+        document.getElementById("chat_s").style.display = 'none';
+        document.getElementById("chat_e").style.display = 'none';
+        content = "chat_n";
     } else if (heading >= 135 && heading < 225) {
         direction = "West";
+        document.getElementById("chat_n").style.display = 'none';
+        document.getElementById("chat_w").style.display = 'block';
+        document.getElementById("chat_s").style.display = 'none';
+        document.getElementById("chat_e").style.display = 'none';
+        content = "chat_w";
     } else if (heading >= 225 && heading < 315){
         direction = "South";
+        document.getElementById("chat_n").style.display = 'none';
+        document.getElementById("chat_w").style.display = 'none';
+        document.getElementById("chat_s").style.display = 'block';
+        document.getElementById("chat_e").style.display = 'none';
+        content = "chat_s";
     } else {
         direction = "East";
+        document.getElementById("chat_n").style.display = 'none';
+        document.getElementById("chat_w").style.display = 'none';
+        document.getElementById("chat_s").style.display = 'none';
+        document.getElementById("chat_e").style.display = 'block';
+        content = "chat_e";
     }
 
     if (old_direction !== direction){

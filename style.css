@@ -38,3 +38,7 @@ body{
 #chat_window_body{
     margin: 10px;
 }
+
+.chat_input{
+    margin-top: 10px;
+}
