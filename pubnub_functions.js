@@ -14,8 +14,7 @@ pubnubDemo.addListener({
 })
 
 pubnubDemo.subscribe({
-    channels: ['North', 'West', 'South', 'East'],
-    withPresence: true
+    channels: ['North'],
 });
 
 
@@ -66,6 +65,8 @@ function handleOrientation(event)
 
     document.getElementById("heading").innerHTML = heading.toFixed([0]);
 
+    var old_direction = direction;
+
     if (heading >= 45 && heading < 135) {
         direction = "North";
     } else if (heading >= 135 && heading < 225) {
@@ -74,6 +75,13 @@ function handleOrientation(event)
         direction = "South";
     } else {
         direction = "East";
+    }
+
+    if (old_direction !== direction){
+        pubnubDemo.unsubscribeAll();
+        pubnubDemo.subscribe({
+            channels: [direction]
+        });
     }
     document.getElementById("direction").innerHTML = direction;
 
