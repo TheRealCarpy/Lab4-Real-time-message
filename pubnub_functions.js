@@ -7,15 +7,16 @@ var pubnubDemo = new PubNub({
     subscribeKey: 'sub-c-78a1f70e-8a0a-11ea-927a-2efbc014b69f'
 });
 
+pubnubDemo.subscribe({
+    channels: ['North'],
+    withPresence: true
+});
+
 pubnubDemo.addListener({
     message: function (event) {
         displayMessage(event.message.msg);
     }
 })
-
-pubnubDemo.subscribe({
-    channels: ['North'],
-});
 
 
 function sendMessage() {
@@ -82,7 +83,8 @@ function handleOrientation(event)
             channels: [old_direction]
         });
         pubnubDemo.subscribe({
-            channels: [direction]
+            channels: [direction],
+            withPresence: true
         });
     }
     document.getElementById("direction").innerHTML = direction;
