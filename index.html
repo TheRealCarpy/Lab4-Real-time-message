@@ -3,15 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 <h1>Hello World!</h1>
 <script src="https://cdn.pubnub.com/sdk/javascript/pubnub.4.21.7.js"></script>
 <script src="pubnub_functions.js"></script>
+<script src="message_functions.js"></script>
 
-<input type="button" value="Ok to see orientation" onClick="givePermission();" />
-<p id="heading">n/a</p>
+<div class="other">
+    <input type="button" value="Enable Device Orientation" onClick="givePermission();" />
+    <p id="heading">n/a</p>
+</div>
 
+<div class="container">
+    <div class="chat_header">
+        <h2 id="direction">No Direction</h2>
+    </div>
+    <div class="chat_window">
+        <div class?="chat_window_body"></div>
+    </div>
+    <div class="chat_input">
+        <input type="text" id="message" name="msg">
+        <input type="submit" value="Send" onclick="sendMessage()">
+    </div>
+</div>
 
 </body>
 </html>

@@ -41,4 +41,18 @@ function handleOrientation(event)
     }
 
     document.getElementById("heading").innerHTML = heading.toFixed([0]);
+
+    var direction = "North";
+    if (heading >= 45 && heading < 135) {
+        direction = "North";
+    } else if (heading >= 135 && heading < 225) {
+        direction = "West";
+    } else if (heading >= 225 && heading < 315){
+        direction = "South";
+    } else {
+        direction = "East";
+    }
+
+    document.getElementById("direction").innerHTML = direction;
+
 }
