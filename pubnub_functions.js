@@ -78,7 +78,9 @@ function handleOrientation(event)
     }
 
     if (old_direction !== direction){
-        pubnubDemo.unsubscribeAll();
+        pubnubDemo.unsubscribe({
+            channels: [old_direction]
+        });
         pubnubDemo.subscribe({
             channels: [direction]
         });
